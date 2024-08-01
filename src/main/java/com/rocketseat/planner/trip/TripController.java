@@ -48,6 +48,12 @@ public class TripController {
         return  trip.map(ResponseEntity::ok).orElseGet(()-> ResponseEntity.notFound().build());
     }
 
+    @GetMapping
+    public ResponseEntity<List<Trip>> getAllTrips(){
+        List<Trip> trips = this.repository.findAll();
+        return ResponseEntity.ok(trips);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Trip> updateTrip(@PathVariable UUID id, @RequestBody TripRequestPayload payload){
         Optional<Trip> trip = this.repository.findById(id);
