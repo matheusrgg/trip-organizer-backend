@@ -54,6 +54,12 @@ public class TripController {
         return ResponseEntity.ok(trips);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Trip>> getTripsByDestination(@RequestParam String destination) {
+        List<Trip> trips = this.repository.findByDestination(destination);
+        return ResponseEntity.ok(trips);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Trip> updateTrip(@PathVariable UUID id, @RequestBody TripRequestPayload payload){
         Optional<Trip> trip = this.repository.findById(id);
